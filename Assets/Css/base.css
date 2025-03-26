@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Conteneur des cartes en flexbox */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap; /* Passe à la ligne si l'écran est trop petit */
+    justify-content: center; /* Centre les cartes */
+    gap: 20px; /* Espacement entre les cartes */
+    padding: 20px;
+}
+
+.card {
+    background-color: white;
+    width: 300px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+/* Ajustement des images */
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.card h2 {
+    font-size: 20px;
+    color: #2d6a4f;
+}
+
+.card p {
+    margin: 5px 0;
+}
+
+/* Style du bouton principal */
+.btn-primary {
+    display: inline-block;
+    background-color: #40916c;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.btn-primary:hover {
+    background-color: #1b4332;
+}
+
+/* Style pour les alertes de faible disponibilité */
+.warn {
+    background-color: #ffcc00; /* Jaune vif */
+    color: #8b0000; /* Rouge foncé pour bien alerter */
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+    display: inline-block;
+}
