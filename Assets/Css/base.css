@@ -1,73 +1,164 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+h1 {
+    color: #2a5c8b; 
     text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+p {
+    text-align: center;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+.cards-container {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    margin: 25px; 
+    max-width: 1200px;
+    margin: 0 auto; 
+}
+
+.card {
+    background: white;
+    width: 300px; 
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1); 
+    overflow: hidden; 
+    margin: 20px; /* Ajout de l'espace entre les cartes */
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    display: block; 
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card h2 {
+    color: #2a5c8b; 
+    margin-top: 0;
+    font-size: 1.3em;
+}
+
+.card p {
+    text-align: left; 
+    margin: 8px 0;
+    font-size: 0.95em;
+}
+
+.card p:first-of-type {
+    color: #e74c3c; 
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.btn-primary {
+    display: block; 
+    background-color: #2a5c8b; 
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s; 
+}
+
+.btn-primary:hover {
+    background-color: #1e415e; 
+}
+
+.warn {
+    background-color: #fff3cd;
+    color: #856404; 
+    padding: 8px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-size: 0.9em;
+    text-align: center;
+    border-left: 4px solid #ffc107;
+}
+/* ---------- HEADER ------------------ */
+.header {
+    background-color: #2a5c8b; 
+    color: white; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 15px; 
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+.logo a {
+    color: white;
+    font-size: 1.8em;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
     margin: 0;
     padding: 0;
 }
 
-p {
-    font-size: 16px;
-    color: #333;
+.nav li {
+    margin: 0 15px;
 }
 
-/* Conteneur des cartes en flexbox */
-.cards-container {
-    display: flex;
-    flex-wrap: wrap; /* Passe à la ligne si l'écran est trop petit */
-    justify-content: center; /* Centre les cartes */
-    gap: 20px; /* Espacement entre les cartes */
-    padding: 20px;
-}
-
-.card {
-    background-color: white;
-    width: 300px;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: left;
-}
-
-/* Ajustement des images */
-.card img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-.card h2 {
-    font-size: 20px;
-    color: #2d6a4f;
-}
-
-.card p {
-    margin: 5px 0;
-}
-
-/* Style du bouton principal */
-.btn-primary {
-    display: inline-block;
-    background-color: #40916c;
+.nav a {
     color: white;
-    padding: 10px;
     text-decoration: none;
-    border-radius: 5px;
-    margin-top: 10px;
-    text-align: center;
+    font-size: 1.1em;
+    transition: color 0.3s;
 }
 
-.btn-primary:hover {
-    background-color: #1b4332;
+.nav a:hover {
+    color: #e74c3c; 
 }
 
-/* Style pour les alertes de faible disponibilité */
-.warn {
-    background-color: #ffcc00; /* Jaune vif */
-    color: #8b0000; /* Rouge foncé pour bien alerter */
+
+/* ---------- FOOTER ---------- */
+.footer {
+    background-color: #2a5c8b;
+    color: white; 
+    padding: 20px; 
+    text-align: center; 
+    font-size: 1em;
+    margin: 0; 
+    box-sizing: border-box; 
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto; /* Centrer le contenu */
+}
+
+.footer p {
+    margin: 10px 0;
+}
+
+.social-links {
+    margin-top: 15px;
+}
+
+.social-icon {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
     font-weight: bold;
-    padding: 8px;
-    border-radius: 5px;
-    text-align: center;
-    margin-top: 10px;
-    display: inline-block;
+}
+
+.social-icon:hover {
+    color: #e74c3c; /* Changer la couleur au survol */
+    text-decoration: underline;
 }
