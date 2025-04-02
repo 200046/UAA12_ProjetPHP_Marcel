@@ -1,10 +1,12 @@
 <?php 
 
+require_once("Models/travailModel.php");
 $uri = $_SERVER["REQUEST_URI"];
 
 if ($uri === "/index.php" || $uri === "/") {
-   
-    $title = "Bienvenue sur le site";
+    // Récuperer toutes les données de la table school 
+
+    $title = "Page d'accueil";
     $template = "Views/pageAccueil.php";
     require_once("Views/base.php");
 }

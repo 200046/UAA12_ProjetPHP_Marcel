@@ -15,10 +15,9 @@ p {
     display: flex; 
     flex-wrap: wrap; 
     justify-content: center; 
-    margin: 25px; 
     max-width: 1200px;
     margin: 0 auto; 
-}
+} 
 
 .card {
     background: white;
@@ -26,7 +25,7 @@ p {
     border-radius: 10px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.1); 
     overflow: hidden; 
-    margin: 20px; /* Ajout de l'espace entre les cartes */
+    margin: 20px;
 }
 
 .card img {
@@ -84,7 +83,7 @@ p {
     text-align: center;
     border-left: 4px solid #ffc107;
 }
-/* ---------- HEADER ------------------ */
+
 .header {
     background-color: #2a5c8b; 
     color: white; 
@@ -92,7 +91,6 @@ p {
     justify-content: space-between; 
     align-items: center;
     padding: 15px; 
-    margin: 0;
     width: 100%;
     box-sizing: border-box; 
 }
@@ -126,21 +124,18 @@ p {
     color: #e74c3c; 
 }
 
-
-/* ---------- FOOTER ---------- */
 .footer {
     background-color: #2a5c8b;
     color: white; 
     padding: 20px; 
     text-align: center; 
     font-size: 1em;
-    margin: 0; 
     box-sizing: border-box; 
 }
 
 .footer-content {
     max-width: 1200px;
-    margin: 0 auto; /* Centrer le contenu */
+    margin: 0 auto;
 }
 
 .footer p {
@@ -159,6 +154,88 @@ p {
 }
 
 .social-icon:hover {
-    color: #e74c3c; /* Changer la couleur au survol */
+    color: #e74c3c;
     text-decoration: underline;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f9fc;
+    align-items: center;
+    min-height: 100vh;
+    color: #2c3e50;
+}
+
+.inscription-container, .connexion-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    margin: 20px;
+}
+
+.inscription-header, .connexion-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.inscription-header h1, .connexion-header h1 {
+    color: #2980b9;
+    margin: 0 0 10px 0;
+    font-size: 28px;
+}
+
+.inscription-header p, .connexion-header p {
+    color: #7f8c8d;
+    margin: 0;
+}
+
+.inscription-form, .connexion-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #34495e;
+}
+
+.form-group input {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #2980b9;
+    outline: none;
+}
+
+.btn-inscription, .btn-connexion {
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.btn-inscription:hover, .btn-connexion:hover {
+    background-color: #1a5276;
 }

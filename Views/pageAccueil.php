@@ -10,7 +10,7 @@
     <p>Un coin de nature en plein cœur de la capitale.</p>
     <p>Places disponibles : 10</p>
     <p class="warn">Ne tardez plus ! Il ne reste plus beaucoup de places</p>
-    <a href="reserver.php" class="btn btn-primary">Voir plus</a>
+    <a href="reserver" class="btn btn-primary">Voir plus</a>
 </div>
 
 <div class="card">
