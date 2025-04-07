@@ -7,8 +7,8 @@
             <li><a href="#">Lien</a></li>
             <li><a href="#">Lien</a></li>
             <li><a href="#">Lien</a></li>
-            <li><a href="#">Lien</a></li>
-            <li><a href="#">Lien</a></li>
+            <li><a href="inscription">Lien</a></li>
+            <li><a href="connexion">Lien</a></li>
         </ul>
     </nav>
 </header>
