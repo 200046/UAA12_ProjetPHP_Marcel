@@ -1,7 +1,7 @@
   <!-- Radio buttons pour gérer les onglets -->
     <input type="radio" name="tabs" id="profile-tab" checked>
     <input type="radio" name="tabs" id="reservations-tab">
-    <input type="radio" name="tabs" id="assignments-tab">
+    <input type="radio" name="tabss" id="assignments-tab">
     
     <div class="tabs">
         <label for="profile-tab" class="tab">Profil</label>
@@ -30,10 +30,10 @@
                     <div class="info-label">Date d'inscription</div>
                     <div class="info-value">15/03/2023</div>
                 </div>
-                <div class="info-item">
+               <!--  <div class="info-item">
                     <div class="info-label">Rôle</div>
                     <div class="info-value">Client</div>
-                </div>
+                </div>  -->
             </div>
         </div>
     </div>
@@ -54,7 +54,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>RES-001</td>
+                        <td>RES-0001</td>
                         <td>Séjour à la montagne</td>
                         <td>Chamonix, France</td>
                         <td>15/07/2023 - 22/07/2023</td>
@@ -65,7 +65,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>RES-002</td>
+                        <td>RES-0002</td>
                         <td>Vacances à la mer</td>
                         <td>Nice, France</td>
                         <td>10/08/2023 - 20/08/2023</td>
@@ -95,12 +95,20 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>AFF-001</td>
+                        <td>AFF-0001</td>
                         <td>Séjour à la montagne</td>
                         <td>Chamonix, France</td>
                         <td>15/07/2023 - 22/07/2023</td>
-                        <td>Animateur</td>
+                        <td>Personnel d'entretien</td>
                         <td><span class="status status-active">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td>AFF-0002</td>
+                        <td>Vacances à la mer</td>
+                        <td>Nice, France</td>
+                        <td>10/08/2023 - 20/08/2023</td>
+                        <td>Cuisinier</td>
+                        <td><span class="status status-pending">En attente de confirmation</span></td>
                     </tr>
                 </tbody>
             </table>
