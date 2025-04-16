@@ -5,17 +5,13 @@ require_once("Models/userModel.php");
 $uri = $_SERVER["REQUEST_URI"];
 
 if ($uri === "/inscription") {
-    var_dump("coucouuu");
-    var_dump($_POST);
     if (isset($_POST['btnEnvoi'])) {
-        var_dump("hellooooooooooo");
         // Vérif des données encodées
         $messageError = verifEmptyData();
         // S'il n'y a pas d'erreur
         var_dump($messageError);
         if (!$messageError) {
             // Ajout de l'utilisateur à la base de données
-            var_dump("salutttttttttt");
             createUser($pdo);
             // Rédirection vers la page de connexion
             header("location:/connexion");
@@ -39,6 +35,7 @@ if ($uri === "/inscription") {
     $template = "Views/Users/connexion.php";
     require_once("Views/base.php");
 } elseif ($uri === "/compte") {
+    $nom = 
     $title = "Mon compte";
     $template = "Views/Users/compte.php";
     require_once("Views/base.php");
@@ -46,5 +43,33 @@ if ($uri === "/inscription") {
     $title = "Qui sommes-nous ?";
     $template = "Views/Users/about.php";
     require_once("Views/base.php");
+} elseif ($uri === "/deconnexion") {
+    // Nettoayeg de la session et retour à l'index
+    session_destroy();
+    header("location:/");
+ } elseif ($uri === "/delete") {
+    // Afficher la page de confirmation
+    $title = "Suppression de compte";
+    $template = "Views/Users/delete.php";
+    require_once("Views/base.php");
+} elseif ($uri === "/delete-confirm") {
+    // Traiter la suppression effective du compte
+    if (isset($_SESSION["user"])) {
+        $userId = $_SESSION["user"]->id_utilisateur;
+        if (deleteUserAccount($pdo, $userId)) {
+            session_destroy();
+            session_start();
+            $_SESSION['success'] = "Votre compte a été supprimé avec succès.";
+            header("location:/");
+            exit;
+        } else {
+            $_SESSION['error'] = "Erreur lors de la suppression du compte.";
+            header("location:/compte");
+            exit;
+        }
+    } else {
+        header("location:/connexion");
+        exit;
+    }
 }
 
