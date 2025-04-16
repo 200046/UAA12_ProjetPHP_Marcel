@@ -42,4 +42,9 @@ if ($uri === "/inscription") {
     $title = "Mon compte";
     $template = "Views/Users/compte.php";
     require_once("Views/base.php");
+} elseif ($uri === "/about") {
+    $title = "Qui sommes-nous ?";
+    $template = "Views/Users/about.php";
+    require_once("Views/base.php");
 }
+

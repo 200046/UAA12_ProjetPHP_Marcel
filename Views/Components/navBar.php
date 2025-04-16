@@ -4,11 +4,11 @@
     </div>
     <nav class="nav">
         <ul>
-            <li><a href="#">Lien</a></li>
-            <li><a href="#">Lien</a></li>
-            <li><a href="#">Lien</a></li>
-            <li><a href="inscription">Lien</a></li>
-            <li><a href="connexion">Lien</a></li>
+            <li><a href="\">Accueil</a></li>
+            <li><a href="about">Qui sommes-nous ?</a></li>
+            <li><a href="inscription">Inscription</a></li>
+            <li><a href="connexion">Connexion</a></li>
+            <li><a href="compte">Mon compte</a></li>
         </ul>
     </nav>
 </header>
