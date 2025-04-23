@@ -71,5 +71,8 @@ if ($uri === "/inscription") {
         header("location:/connexion");
         exit;
     }
-}
-
+} elseif ($uri === "/team") {
+    $title = "Nos employés";
+    $template = "Views/Users/notreEquipe.php";
+    require_once("Views/base.php");
+} 

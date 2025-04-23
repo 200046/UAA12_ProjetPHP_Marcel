@@ -1,8 +1,10 @@
-CREATE TABLE Utilisateur (
+-- Création des tables
+CREATE TABLE utilisateur (
     id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(255) UNIQUE,
     nom VARCHAR(100),
     prenom VARCHAR(100),
+    motdepasse VARCHAR(100),
     telephone VARCHAR(20),
     role VARCHAR(50),
     date_inscription DATE
@@ -13,7 +15,7 @@ CREATE TABLE employe (
     id_utilisateur INT UNIQUE,
     poste VARCHAR(100),
     statut VARCHAR(50),
-    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur)
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur)
 );
 
 CREATE TABLE offre_sejour (
@@ -37,7 +39,7 @@ CREATE TABLE reservation (
     id_offre INT,
     date_reservation DATE,
     statut VARCHAR(50),
-    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur),
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur),
     FOREIGN KEY (id_offre) REFERENCES offre_sejour(id_offre)
 );
 

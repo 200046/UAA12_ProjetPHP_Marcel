@@ -1,6 +1,5 @@
 <?php 
 // Appeler la fonction pour récupérer les offres
-$offres = getOffres($pdo);
 /* // Afficher les offres pour débogage (par exemple)
 echo '<pre>';
 print_r($offres);

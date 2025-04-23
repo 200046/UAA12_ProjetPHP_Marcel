@@ -4,5 +4,5 @@
 
 <div class="btn-container">
     <a href="/compte" class="btn btn-secondary">Annuler</a>
-    <a href="/delete-confirm" class="btn btn-danger" onclick="return confirm('Êtes-vous vraiment sûr de vouloir supprimer votre compte définitivement?');">Supprimer mon compte</a>
+    <a href="/delete-confirm" class="btn btn-danger">Supprimer mon compte</a>
 </div>
