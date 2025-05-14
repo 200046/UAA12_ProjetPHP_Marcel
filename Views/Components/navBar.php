@@ -1,5 +1,5 @@
 <div class="header"><div class="logo">
-        <a href="#">Campignions</a> 
+        <p>Campignions</p> 
     </div>
     <nav class="nav" aria-label="Menu de navigation">
         <ul>

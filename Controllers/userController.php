@@ -1,5 +1,8 @@
 <?php
 require_once("Models/userModel.php");
+require_once("Models/teamModel.php");
+require_once("Models/teamModel.php");
+
 
 // Récupération du chemin désiré
 $uri = $_SERVER["REQUEST_URI"];
@@ -41,7 +44,7 @@ if ($uri === "/inscription") {
     require_once("Views/base.php");
 } elseif ($uri === "/about") {
     $title = "Qui sommes-nous ?";
-    $template = "Views/Users/about.php";
+    $template = "Views/Info/about.php";
     require_once("Views/base.php");
 } elseif ($uri === "/deconnexion") {
     // Nettoayeg de la session et retour à l'index
@@ -72,7 +75,12 @@ if ($uri === "/inscription") {
         exit;
     }
 } elseif ($uri === "/team") {
+    $teamMembers = getTeamMembers($pdo);
     $title = "Nos employés";
-    $template = "Views/Users/notreEquipe.php";
+    $template = "Views/Info/notreEquipe.php";
+    require_once("Views/base.php");
+}  elseif ($uri === "/gestion") {
+    $title = "Nos employés";
+    $template = "Views/Staff/gestion.php";
     require_once("Views/base.php");
 } 
