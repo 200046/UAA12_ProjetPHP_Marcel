@@ -18,11 +18,6 @@
                     <p class="position"><?= htmlspecialchars($member['poste']); ?></p>
 
                     <div class="member-contact">
-                        <a class="email-button"
-                            href="mailto:<?= htmlspecialchars($member['email']); ?>?subject=Contact%20depuis%20le%20site&body=Bonjour%20<?= htmlspecialchars($member['prenom']); ?>%2C%0D%0A%0D%0AJe%20souhaite%20vous%20contacter%20concernant%20%3A%20%5Bvotre%20objet%20ici%5D.%0D%0A%0D%0AMes%20informations%20%3A%0D%0A-%20Nom%20%3A%20%5Bvotre%20nom%5D%0D%0A-%20Prénom%20%3A%20%5Bvotre%20prénom%5D%0D%0A-%20Téléphone%20%3A%20%5Bvotre%20numéro%5D%0D%0A-%20Message%20%3A%0D%0A%5Bvotre%20message%5D%0D%0A%0D%0ACordialement%2C%0D%0A%5Bsignature%5D">
-                            <button type="button">Contacter par email</button>
-                        </a>
-
                         <div class="phone-wrapper">
                             <button type="button" onclick="togglePhoneInfo(this)">Appeler</button>
                             <div class="phone-info">

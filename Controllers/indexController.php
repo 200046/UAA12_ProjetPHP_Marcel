@@ -9,6 +9,8 @@ if ($uri === "/index.php" || $uri === "/") {
     $title = "Page d'accueil";
     $template = "Views/pageAccueil.php";
     require_once("Views/base.php");
+    $isClientLoggedIn = isset($_SESSION['client']); // ou toute autre logique de connexion
+
 }
 
 ?>

@@ -63,10 +63,9 @@ function verifEmptyData()
     }
 }
 
-function updateUser($pdo)
-{
+function updateUser($pdo) {
     try {
-        $query = 'UPDATE Utilisateur SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, motdepasse = :mot_de_passe
+        $query = 'UPDATE Utilisateur SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, motdepasse = :motdepasse
                   WHERE id_utilisateur = :id_utilisateur';
 
         $ajouterUser = $pdo->prepare($query);
@@ -75,12 +74,14 @@ function updateUser($pdo)
             'prenom' => $_POST["prenom"],
             'email' => $_POST["email"],
             'telephone' => $_POST["telephone"],
-            'mot_de_passe' => $_POST["motdepasse"],
+            'motdepasse' => $_POST["motdepasse"],
             'id_utilisateur' => $_SESSION["user"]->id_utilisateur
         ]);
+        
+        return true;
     } catch (PDOException $e) {
-        $message = $e->getMessage();
-        die($message);
+        error_log("Erreur lors de la mise à jour de l'utilisateur: " . $e->getMessage());
+        return false;
     }
 }
 

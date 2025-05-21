@@ -38,11 +38,50 @@ if ($uri === "/inscription") {
     $template = "Views/Users/connexion.php";
     require_once("Views/base.php");
 } elseif ($uri === "/compte") {
-    $nom = 
+    // Gestion de la mise à jour du profil
+    if (isset($_POST['updateProfile'])) {
+        // Validation des données
+        $errors = [];
+        
+        if (empty($_POST['nom'])) {
+            $errors['nom'] = "Le nom est obligatoire";
+        }
+        
+        if (empty($_POST['prenom'])) {
+            $errors['prenom'] = "Le prénom est obligatoire";
+        }
+        
+        if (empty($_POST['email'])) {
+            $errors['email'] = "L'email est obligatoire";
+        } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors['email'] = "L'email n'est pas valide";
+        }
+        
+        if (empty($_POST['telephone'])) {
+            $errors['telephone'] = "Le téléphone est obligatoire";
+        }
+        
+        // Si pas d'erreurs, procéder à la mise à jour
+        if (empty($errors)) {
+            // Si le mot de passe n'est pas fourni, on garde l'ancien
+            if (empty($_POST['motdepasse'])) {
+                $_POST['motdepasse'] = $_SESSION["user"]->motdepasse;
+            }
+            
+            updateUser($pdo);
+            updateSession($pdo);
+            
+            // Message de succès
+            $_SESSION['success'] = "Vos informations ont été mises à jour avec succès.";
+            header("Location: /compte");
+            exit;
+        }
+    }
+    
     $title = "Mon compte";
     $template = "Views/Users/compte.php";
-    require_once("Views/base.php");
-} elseif ($uri === "/about") {
+    require_once("Views/base.php"); 
+}elseif ($uri === "/about") {
     $title = "Qui sommes-nous ?";
     $template = "Views/Info/about.php";
     require_once("Views/base.php");
