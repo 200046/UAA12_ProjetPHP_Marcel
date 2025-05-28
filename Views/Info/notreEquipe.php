@@ -16,24 +16,6 @@
                 <div class="member-info">
                     <h3><?= htmlspecialchars($member['prenom'] . ' ' . $member['nom']); ?></h3>
                     <p class="position"><?= htmlspecialchars($member['poste']); ?></p>
-
-                    <div class="member-contact">
-                        <div class="phone-wrapper">
-                            <button type="button" onclick="togglePhoneInfo(this)">Appeler</button>
-                            <div class="phone-info">
-                                <p><strong>Horaires d'appel :</strong><br>
-                                    Lundi au vendredi : 9h - 12h / 14h - 18h<br>
-                                    Samedi : 10h - 13h<br>
-                                    Fermé le dimanche</p>
-
-                                <p><strong>Tarifs :</strong><br>
-                                    Appel non surtaxé — coût d’un appel local depuis la France métropolitaine.<br>
-                                    Gratuit depuis un forfait illimité ou via une box internet.</p>
-
-                                <a href="tel:<?= htmlspecialchars($member['telephone']); ?>" class="call-now">📞 Appeler maintenant</a>
-                            </div>
-                        </div>
-
                     </div>
 
                     <?php $assignments = getEmployeeAssignments($pdo, $member['id_employe']); ?>
