@@ -14,7 +14,7 @@
             <p>Places disponibles : <?php echo $offre['places_disponibles']; ?></p>
 
             <?php if ($offre['places_disponibles'] > 0): ?>
-                <?php if ($isClientLoggedIn): ?>
+                <?php if (isset($_SESSION["user"])): ?>
                     <a href="reserver?offre_id=<?php echo $offre['id_offre']; ?>" class="btn btn-primary">Voir plus</a>
                 <?php else: ?>
                     <p class="warning">Connectez-vous pour réserver.</p>

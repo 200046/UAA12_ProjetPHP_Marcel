@@ -6,28 +6,28 @@
             <div class="edit-form">
                 <div class="form-group">
                     <label for="nom">Nom</label>
-                    <input type="text" id="nom" name="nom" value="<?= htmlspecialchars($_SESSION["user"]->nom) ?>" required>
+                    <input type="text" id="nom" name="nom" value="<?=$_SESSION["user"]->nom?>" required>
                     <?php if (isset($errors['nom'])): ?>
                         <span class="error"><?= $errors['nom'] ?></span>
                     <?php endif; ?>
                 </div>
                 <div class="form-group">
                     <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom" name="prenom" value="<?= htmlspecialchars($_SESSION["user"]->prenom) ?>" required>
+                    <input type="text" id="prenom" name="prenom" value="<?=$_SESSION["user"]->prenom?>" required>
                     <?php if (isset($errors['prenom'])): ?>
                         <span class="error"><?= $errors['prenom'] ?></span>
                     <?php endif; ?>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="<?= htmlspecialchars($_SESSION["user"]->email) ?>" required>
+                    <input type="email" id="email" name="email" value="<?=$_SESSION["user"]->email?>" required>
                     <?php if (isset($errors['email'])): ?>
                         <span class="error"><?= $errors['email'] ?></span>
                     <?php endif; ?>
                 </div>
                 <div class="form-group">
                     <label for="telephone">Téléphone</label>
-                    <input type="tel" id="telephone" name="telephone" value="<?= htmlspecialchars($_SESSION["user"]->telephone) ?>" required>
+                    <input type="tel" id="telephone" name="telephone" value="<?=$_SESSION["user"]->telephone?>" required>
                     <?php if (isset($errors['telephone'])): ?>
                         <span class="error"><?= $errors['telephone'] ?></span>
                     <?php endif; ?>
