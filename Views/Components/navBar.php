@@ -1,4 +1,5 @@
-<div class="header"><div class="logo">
+<div class="header">
+    <div class="logo">
         <p>Campignions</p> 
     </div>
     <nav class="nav" aria-label="Menu de navigation">
@@ -12,6 +13,9 @@
             <?php else :?>
                 <li><a href="inscription">Inscription</a></li>
                 <li><a href="connexion">Connexion</a></li>
+            <?php endif ?>
+            <?php if (isset($_SESSION['user']) && $_SESSION['user']->role === 'admin') :?>
+                <li><a href="gestion">Panel d'administration</a></li>
             <?php endif ?>
         </ul>
     </nav>

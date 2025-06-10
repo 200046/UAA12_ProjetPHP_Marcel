@@ -1,6 +1,5 @@
 <!-- PAGE ADMIN -->
-<input type="email" id="email" name="email" value="<?= $_SESSION["user"]->email ?>" required>
-
+<p>Vous êtes connecté en: <span><?= $_SESSION["user"]->email ?></span> - <span><?= $_SESSION["user"]->nom ?></span> <span><?= $_SESSION["user"]->prenom ?></span></p>
 <h2>Modifier</h2>
 <div class="cards-container">
     <form method="post" action="/gestion">
