@@ -10,7 +10,7 @@
 
             <?php if ($offre['places_disponibles'] > 0): ?>
                 <?php if (isset($_SESSION["user"])): ?>
-                    <a name="btnReserver" href="reserver?offre_id=<?php echo $offre['id_offre']; ?>" class="btn btn-primary btnReserver">Voir plus</a>
+                    <a href="reserver?id_offre=<?php echo $offre['id_offre']; ?>" class="btn btn-primary btnReserver">Voir plus</a>
                 <?php else: ?>
                     <p class="warning">Connectez-vous pour réserver.</p>
                 <?php endif; ?>

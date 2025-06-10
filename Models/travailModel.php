@@ -23,13 +23,13 @@ function getOffreById(PDO $pdo, int $id_offre) {
     }
 }
 
-function updateOffrePlaces(PDO $pdo, int $offre_id, int $nb_places_soustraire) {
-    $sql = "UPDATE offre_sejour SET places_disponibles = places_disponibles - :nb_places_soustraire WHERE id_offre = :offre_id AND places_disponibles >= :nb_places_soustraire";
+function updateOffrePlaces(PDO $pdo, int $id_offre, int $nb_places_soustraire) {
+    $sql = "UPDATE offre_sejour SET places_disponibles = places_disponibles - :nb_places_soustraire WHERE id_offre = :id_offre AND places_disponibles >= :nb_places_soustraire";
     $stmt = $pdo->prepare($sql);
     try {
         $stmt->execute([
             'nb_places_soustraire' => $nb_places_soustraire, 
-            'offre_id' => $offre_id
+            'id_offre' => $id_offre
         ]);
         return $stmt->rowCount(); 
     } catch (PDOException $e) {
@@ -110,14 +110,14 @@ function updateSejour(PDO $pdo, array $data) {
 }
 
 // Fonction createReservation (inchangée car le prix n'y est pas directement lié)
-function createReservation(PDO $pdo, int $user_id, int $offre_id, int $nombre_places) {
+function createReservation(PDO $pdo, int $user_id, int $id_offre, int $nombre_places) {
     $sql = "INSERT INTO reservation (id_utilisateur, id_offre, nombre_places, date_reservation)
             VALUES (:id_utilisateur, :id_offre, :nombre_places, NOW())";
     $stmt = $pdo->prepare($sql);
     try {
         $stmt->execute([
             'id_utilisateur' => $user_id,
-            'id_offre' => $offre_id,
+            'id_offre' => $id_offre,
             'nombre_places' => $nombre_places
         ]);
         return $pdo->lastInsertId();

@@ -27,7 +27,7 @@ if ($uri === "/inscription") {
     // Vérifier si l'utilisateur a cliqué sur le bouton du form
     if (isset($_POST['btnEnvoi'])) {
         // Pour récupere l'erreur si l'utilisateur fait une faute de frappe
-        $erreur = false; 
+        $erreur = false;
         // Tentative de connexion et de récuperation des données de l'utilisateur
         if (connectUser($pdo)) { // Cette fonction devrait être définie dans userModel.php
             // Rédirection vers la page d'accueil
@@ -40,10 +40,10 @@ if ($uri === "/inscription") {
     require_once("Views/base.php");
 } elseif ($uri === "/compte") {
     // Récupération des offres (pour l'affichage sur la page compte si nécessaire)
-    $offres = getOffres($pdo); 
+    $offres = getOffres($pdo);
 
     // Gestion de la mise à jour du profil
-    if (isset($_POST['updateProfile'])) { 
+    if (isset($_POST['updateProfile'])) {
         // Validation des données
         $errors = [];
 
@@ -103,9 +103,9 @@ if ($uri === "/inscription") {
     // Traiter la suppression effective du compte
     if (isset($_SESSION["user"])) {
         $userId = $_SESSION["user"]->id_utilisateur;
-        if (deleteUserAccount($pdo, $userId)) { 
+        if (deleteUserAccount($pdo, $userId)) {
             session_destroy();
-            session_start(); 
+            session_start();
             $_SESSION['success'] = "Votre compte a été supprimé avec succès.";
             header("location:/");
             exit();
@@ -119,7 +119,7 @@ if ($uri === "/inscription") {
         exit();
     }
 } elseif ($uri === "/team") {
-    $teamMembers = getTeamMembers($pdo); 
+    $teamMembers = getTeamMembers($pdo);
     $title = "Nos employés";
     $template = "Views/Info/notreEquipe.php";
     require_once("Views/base.php");
@@ -143,7 +143,7 @@ if ($uri === "/inscription") {
                     $currentErrors['titre'] = "Le titre est obligatoire pour l'offre " . $id_offre;
                 }
                 // Suppression de la validation du prix ici
-                
+
                 if (empty($currentErrors)) {
                     $data = [
                         'id_offre' => (int)$id_offre,
@@ -154,12 +154,12 @@ if ($uri === "/inscription") {
                         'description' => $_POST['description'][$index],
                         'places_disponibles' => (int)$_POST['places_disponibles'][$index]
                     ];
-                    if (!updateSejour($pdo, $data)) { 
+                    if (!updateSejour($pdo, $data)) {
                         $errors['db_update'] = "Erreur lors de la mise à jour du séjour avec l'ID " . $id_offre;
-                        break; 
+                        break;
                     }
                 } else {
-                    $errors['validation'] = $currentErrors; 
+                    $errors['validation'] = $currentErrors;
                     break;
                 }
             }
@@ -169,7 +169,7 @@ if ($uri === "/inscription") {
             $_SESSION['success'] = "Les modifications ont été enregistrées avec succès !";
         } else {
             $_SESSION['error'] = "Erreur(s) lors de l'enregistrement des modifications.";
-            $_SESSION['errors_detail'] = $errors; 
+            $_SESSION['errors_detail'] = $errors;
         }
         header("Location: /gestion");
         exit();
@@ -222,58 +222,46 @@ if ($uri === "/inscription") {
             }
         } else {
             $_SESSION['error'] = "Veuillez corriger les erreurs dans le formulaire.";
-            $_SESSION['errors_create'] = $errors; 
-            $_SESSION['old_input_create'] = $_POST; 
+            $_SESSION['errors_create'] = $errors;
+            $_SESSION['old_input_create'] = $_POST;
         }
-        header("Location: /gestion"); 
+        header("Location: /gestion");
         exit();
     }
 
     $title = "Page admin";
     $template = "Views/Staff/gestion.php";
     require_once("Views/base.php");
-} elseif (isset($_GET["offre_id"]) && $uri === "/reserver?offre_id=" . $_GET["offre_id"]) {
+} elseif (isset($_GET["id_offre"]) && $uri === "/reserver?id_offre=" . $_GET["id_offre"]) {
+    var_dump("1");
     $title = "Réservation de séjour";
-    $template = "Views/Reservation/reserver.php";
-
+    $template = "Views/Users/reserver.php";
+    var_dump("2");
     $offre = null;
     $errors = [];
     $successMessage = '';
 
-    $offre_id = filter_input(INPUT_GET, 'offre_id', FILTER_VALIDATE_INT);
-
-    if ($offre_id !== false && $offre_id !== null) {
-        $offre = getOffreById($pdo, $offre_id); 
+    $id_offre = filter_input(INPUT_GET, 'id_offre', FILTER_VALIDATE_INT);
+    var_dump("3");
+    if ($id_offre !== false && $id_offre !== null) {
+        $offre = getOffreById($pdo, $id_offre);
         if (!$offre) $errors['offre'] = "Séjour introuvable.";
     } else {
         $errors['offre'] = "Identifiant de séjour manquant ou invalide.";
     }
+    var_dump("4");
+    if (!isset($_SESSION["user"])) {
+        $errors['auth'] = "Vous devez être connecté pour réserver.";
+    } else {
+        $id_utilisateur = $_SESSION["user"]->id_utilisateur;
+        $nombre_places = filter_input(INPUT_POST, 'nombre_places', FILTER_VALIDATE_INT);
 
-    if (isset($_POST['btnReserver']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-            var_dump("Controlleur reserver");
-        if (!isset($_SESSION["user"])) {
-            $errors['auth'] = "Vous devez être connecté pour réserver.";
-        } else {
-            $id_utilisateur = $_SESSION["user"]->id_utilisateur;
-            $nombre_places = filter_input(INPUT_POST, 'nombre_places', FILTER_VALIDATE_INT);
-
-            if ($nombre_places === false || $nombre_places <= 0) {
-                $errors['nombre_places'] = "Le nombre de places doit être un entier positif.";
-            } elseif ($offre && $nombre_places > $offre['places_disponibles']) { 
-                $errors['nombre_places'] = "Il n'y a pas assez de places disponibles. Restant : " . $offre['places_disponibles'];
-            }
-
-            if (empty($errors) && $offre) {
-                if (createReservation($pdo, $id_utilisateur, $offre['id_offre'], $nombre_places)) {
-                    updateOffrePlaces($pdo, $offre['id_offre'], $nombre_places); 
-                    $successMessage = "Votre réservation a été effectuée avec succès !";
-                    $offre = getOffreById($pdo, $offre_id); 
-                } else {
-                    $errors['reservation'] = "Une erreur est survenue lors de la réservation.";
-                }
-            }
+        if ($nombre_places === false || $nombre_places <= 0) {
+            $errors['nombre_places'] = "Le nombre de places doit être un entier positif.";
+        } elseif ($offre && $nombre_places > $offre['places_disponibles']) {
+            $errors['nombre_places'] = "Il n'y a pas assez de places disponibles. Restant : " . $offre['places_disponibles'];
         }
+        var_dump($template);
     }
-
     require_once("Views/base.php");
 }
