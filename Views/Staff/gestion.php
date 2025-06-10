@@ -1,5 +1,4 @@
-<!-- PAGE ADMIN -->
-<p>Vous êtes connecté en: <span><?= $_SESSION["user"]->email ?></span> - <span><?= $_SESSION["user"]->nom ?></span> <span><?= $_SESSION["user"]->prenom ?></span></p>
+<p>Vous êtes connecté en: <span><?= $_SESSION["user"]->nom ?></span> <span><?= $_SESSION["user"]->prenom ?></span></p>
 <h2>Modifier</h2>
 <div class="cards-container">
     <form method="post" action="/gestion">
@@ -44,7 +43,7 @@
                 <p class="warning">Désolé, cette offre est complète.</p>
             <?php endif; ?>
             <?php endforeach; ?>
-<button type="updateSejour" class="btn btn-success">Enregistrer les modifications</button>
+<button type="submit" class="btn btn-success">Enregistrer les modifications</button>
 </form>
 </div>
 

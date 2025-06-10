@@ -9,7 +9,6 @@ if (!isset($_SESSION["user"])) {
     header("Location: login.php");
     exit;
 }
-
 // Vérifier que la confirmation est présente
 if (!isset($_GET['confirm']) || $_GET['confirm'] !== 'yes') {
     header("Location: confirm_delete.php"); // Rediriger vers la page de confirmation

@@ -1,7 +1,4 @@
 <?php
-/**
- * Récupère tous les membres de l'équipe (employés) avec leurs informations de base
- */
 function getTeamMembers($pdo) {
     $query = "
         SELECT id_employe, poste, statut as statut_employe,
@@ -17,9 +14,6 @@ function getTeamMembers($pdo) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-/**
- * Récupère les affectations d'un employé à des offres de séjour
- */
 function getEmployeeAssignments($pdo, $employeeId) {
     $query = "
        SELECT a.id_affectation, a.role, a.id_offre, o.titre

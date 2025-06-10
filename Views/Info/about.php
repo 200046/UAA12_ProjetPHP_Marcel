@@ -29,13 +29,10 @@
                     <p>Nous croyons fermement que des vacances en plein air de qualité devraient être accessibles à tous. C'est pourquoi nous proposons des tarifs <span class="highlight">2 à 3 fois moins chers</span> que nos concurrents, sans jamais compromettre sur la qualité.</p>
                     <p>Notre engagement : vous offrir le meilleur rapport qualité-prix du marché.</p>
                 </div>
-                
                 <div class="about-image">
                     <img src="https://images.unsplash.com/photo-1537905569824-f89f14cceb68?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Équipe Campignions">
                 </div>
             </div>
-
-            <!-- Chiffres clés -->
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-number">50+</div>
@@ -63,8 +60,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Témoignages -->
     <section class="testimonials-section">
         <div class="container">
             <h2>Ils nous font confiance</h2>
@@ -84,8 +79,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Team Section -->
     <section class="team-section">
         <div class="container">
             <h2>Notre équipe</h2>
@@ -140,8 +133,6 @@
             </div>
         </div>
     </section>
-
-    <!-- FAQ Section -->
     <section class="faq-section">
         <div class="container">
             <h2>Questions fréquentes</h2>
@@ -161,8 +152,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Partenaires -->
     <section class="partners-section">
         <div class="container">
             <h2>Nos partenaires officiels</h2>
@@ -174,8 +163,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Telephone Section -->
     <section class="telephone-section">
         <div class="container">
             <h2>Nous contacter</h2>

@@ -44,7 +44,6 @@
                 </div>
             </div>
         </form>
-        
         <div class="account-actions">
             <a href="/delete" class="btn btn-danger">Supprimer mon compte</a>
         </div>

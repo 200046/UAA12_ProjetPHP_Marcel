@@ -1,8 +1,6 @@
 <?php
 require_once("Models/userModel.php");
 require_once("Models/teamModel.php");
-require_once("Models/teamModel.php");
-
 
 // Récupération du chemin désiré
 $uri = $_SERVER["REQUEST_URI"];
@@ -194,4 +192,50 @@ if ($uri === "/inscription") {
     $title = "Page admin";
     $template = "Views/Staff/gestion.php";
     require_once("Views/base.php");
+} elseif ($uri === "/reserver" && isset($_GET["offre_id"])) {
+    $title = "Réservation de séjour";
+    $template = "Views/Reservation/reserver.php";
+
+    $offre = null;
+    $errors = [];
+    $successMessage = '';
+
+    $offre_id = filter_input(INPUT_GET, 'offre_id', FILTER_VALIDATE_INT);
+
+    if ($offre_id !== false && $offre_id !== null) {
+        $offre = getOffreById($pdo, $offre_id);
+        if (!$offre) $errors['offre'] = "Séjour introuvable.";
+    } else {
+        $errors['offre'] = "Identifiant de séjour manquant ou invalide.";
+    }
+
+    if (isset($_POST['btnReserver']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (!isset($_SESSION["user"])) {
+            $errors['auth'] = "Vous devez être connecté pour réserver.";
+        } else {
+            $id_utilisateur = $_SESSION["user"]->id_utilisateur;
+            $nombre_places = filter_input(INPUT_POST, 'nombre_places', FILTER_VALIDATE_INT);
+
+            if ($nombre_places === false || $nombre_places <= 0) {
+                $errors['nombre_places'] = "Le nombre de places doit être un entier positif.";
+            } elseif ($offre && $nombre_places > $offre['places_disponibles']) {
+                $errors['nombre_places'] = "Il n'y a pas assez de places disponibles. Restant : " . $offre['places_disponibles'];
+            }
+
+            if (empty($errors) && $offre) {
+                $reservation_reussie = createReservation($pdo, $id_utilisateur, $offre['id_offre'], date('Y-m-d'), $nombre_places);
+                if ($reservation_reussie) {
+                    $new_places_disponibles = $offre['places_disponibles'] - $nombre_places;
+                    updateOffrePlaces($pdo, $offre['id_offre'], $new_places_disponibles);
+                    $successMessage = "Votre réservation a été effectuée avec succès !";
+                    $offre = getOffreById($pdo, $offre_id); // Rechargement
+                } else {
+                    $errors['reservation'] = "Une erreur est survenue lors de la réservation.";
+                }
+            }
+        }
+    }
+
+    require_once("Views/base.php");
+
 }

@@ -1,6 +1,5 @@
 <h1>Bienvenue sur notre agence de camping !</h1>
 <p>Réservez vos prochaines vacances ci-dessous 🏕️</p>
-
 <div class="cards-container">
     <?php foreach ($offres as $offre): ?>
         <div class="card">

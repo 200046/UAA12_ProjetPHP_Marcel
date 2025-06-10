@@ -9,4 +9,3 @@ try {
     $message = $e->getMessage();
     die($message);
 }
-?>
