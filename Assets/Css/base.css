@@ -962,3 +962,41 @@ tr:hover {
 .phone-info .call-now:hover {
     background-color: #0056b3;
 }
+
+    /* Styles pour le conteneur des cartes */
+    .cards-container {
+        display: flex; /* Utilise Flexbox pour aligner les éléments en ligne */
+        flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si l'espace est insuffisant */
+        gap: 20px; /* Ajoute un espacement entre les cartes */
+        justify-content: flex-start; /* Aligne les cartes au début du conteneur */
+    }
+
+    /* Styles pour chaque carte individuelle */
+    .card {
+        border: 1px solid #ddd; /* Bordure légère */
+        padding: 15px; /* Espacement interne */
+        border-radius: 8px; /* Coins arrondis */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Légère ombre */
+        background-color: #fff; /* Fond blanc */
+        flex: 1 1 calc(33% - 20px); /* Ajuste la largeur de chaque carte (environ 3 par ligne avec un espacement) */
+        min-width: 280px; /* Largeur minimale pour les cartes */
+        box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur */
+    }
+
+    /* Styles pour les formulaires à l'intérieur des conteneurs de cartes */
+    .cards-container form {
+        display: flex; /* Permet de mettre le bouton "Enregistrer" ou "Créer" à côté des cartes si désiré */
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    /* Ajustement pour les boutons de soumission */
+    .cards-container form .btn {
+        margin-top: 15px; /* Espacement au-dessus des boutons */
+        width: 100%; /* Le bouton prend toute la largeur si pas assez d'espace */
+    }
+
+    /* Pour que les boutons s'affichent correctement si les cartes ne remplissent pas la ligne */
+    .cards-container form {
+        align-items: flex-start; /* Aligne les éléments en haut */
+    }
