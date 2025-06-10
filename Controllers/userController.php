@@ -9,12 +9,12 @@ $uri = $_SERVER["REQUEST_URI"];
 if ($uri === "/inscription") {
     if (isset($_POST['btnEnvoi'])) {
         // Vérif des données encodées
-        $messageError = verifEmptyData(); // Cette fonction devrait être définie dans userModel.php
+        $messageError = verifEmptyData();  
         // S'il n'y a pas d'erreur
         var_dump($messageError); // Pour le débogage, à retirer en production
         if (!$messageError) {
             // Ajout de l'utilisateur à la base de données
-            createUser($pdo); // Cette fonction devrait être définie dans userModel.php
+            createUser($pdo);  
             // Rédirection vers la page de connexion
             header("location:/connexion");
             exit(); // Toujours exit() après une redirection
@@ -29,8 +29,7 @@ if ($uri === "/inscription") {
         // Pour récupere l'erreur si l'utilisateur fait une faute de frappe
         $erreur = false;
         // Tentative de connexion et de récuperation des données de l'utilisateur
-        if (connectUser($pdo)) { // Cette fonction devrait être définie dans userModel.php
-            // Rédirection vers la page d'accueil
+        if (connectUser($pdo)) { 
             header("location:/compte");
             exit();
         }
@@ -39,12 +38,9 @@ if ($uri === "/inscription") {
     $template = "Views/Users/connexion.php";
     require_once("Views/base.php");
 } elseif ($uri === "/compte") {
-    // Récupération des offres (pour l'affichage sur la page compte si nécessaire)
     $offres = getOffres($pdo);
 
-    // Gestion de la mise à jour du profil
     if (isset($_POST['updateProfile'])) {
-        // Validation des données
         $errors = [];
 
         if (empty($_POST['nom'])) {
@@ -62,15 +58,13 @@ if ($uri === "/inscription") {
             $errors['telephone'] = "Le téléphone est obligatoire";
         }
 
-        // Si pas d'erreurs, procéder à la mise à jour
         if (empty($errors)) {
-            // Si le mot de passe n'est pas fourni, on garde l'ancien
             if (empty($_POST['motdepasse'])) {
                 $_POST['motdepasse'] = $_SESSION["user"]->motdepasse;
             }
 
-            updateUser($pdo); // Cette fonction devrait être définie dans userModel.php
-            updateSession($pdo); // Cette fonction devrait être définie dans userModel.php
+            updateUser($pdo); 
+            updateSession($pdo); 
 
             // Message de succès
             $_SESSION['success'] = "Vos informations ont été mises à jour avec succès.";
@@ -124,10 +118,8 @@ if ($uri === "/inscription") {
     $template = "Views/Info/notreEquipe.php";
     require_once("Views/base.php");
 } elseif ($uri === "/gestion") {
-    // Récupération des offres pour les afficher dans le formulaire de modification
     $offres = getOffres($pdo);
 
-    // --- Gestion de la mise à jour des séjours existants ---
     if (isset($_POST['updateSejoursBtn'])) {
         $errors = [];
         if (!isset($_POST['id_offre']) || !is_array($_POST['id_offre'])) {
@@ -174,15 +166,7 @@ if ($uri === "/inscription") {
         header("Location: /gestion");
         exit();
     }
-
-    // --- Gestion de la création d'un nouveau séjour ---
     if (isset($_POST['createSejourBtn'])) {
-        // Suppression du DEBUG temporaire
-        // echo "<pre>DEBUG: Bouton 'createSejourBtn' détecté !</pre>";
-        // echo "<pre>DEBUG: Contenu de \$_POST : ";
-        // print_r($_POST);
-        // echo "</pre>";
-        // exit; 
         $errors = [];
 
         // Validation des données du nouveau séjour
@@ -233,23 +217,19 @@ if ($uri === "/inscription") {
     $template = "Views/Staff/gestion.php";
     require_once("Views/base.php");
 } elseif (isset($_GET["id_offre"]) && $uri === "/reserver?id_offre=" . $_GET["id_offre"]) {
-    var_dump("1");
     $title = "Réservation de séjour";
     $template = "Views/Users/reserver.php";
-    var_dump("2");
     $offre = null;
     $errors = [];
     $successMessage = '';
 
     $id_offre = filter_input(INPUT_GET, 'id_offre', FILTER_VALIDATE_INT);
-    var_dump("3");
     if ($id_offre !== false && $id_offre !== null) {
         $offre = getOffreById($pdo, $id_offre);
         if (!$offre) $errors['offre'] = "Séjour introuvable.";
     } else {
         $errors['offre'] = "Identifiant de séjour manquant ou invalide.";
     }
-    var_dump("4");
     if (!isset($_SESSION["user"])) {
         $errors['auth'] = "Vous devez être connecté pour réserver.";
     } else {
@@ -261,7 +241,66 @@ if ($uri === "/inscription") {
         } elseif ($offre && $nombre_places > $offre['places_disponibles']) {
             $errors['nombre_places'] = "Il n'y a pas assez de places disponibles. Restant : " . $offre['places_disponibles'];
         }
-        var_dump($template);
     }
     require_once("Views/base.php");
+} elseif ($uri === "/mes-affectations") {
+       $title = "Vos affectations";
+    $template = "Views/Staff/affectation.php";
+    // Vérifier si l'utilisateur est connecté
+    if (!isset($_SESSION["user"])) {
+        $_SESSION['error'] = "Vous devez être connecté pour accéder à cette page.";
+        header("Location: /connexion");
+        exit();
+    }
+
+    // Vérifier si l'utilisateur est un employé
+    if ($_SESSION["user"]->role !== 'employe') {
+        $_SESSION['error'] = "Vous n'avez pas les autorisations nécessaires pour accéder à cette page.";
+        header("Location: /compte"); // Rediriger vers une autre page si pas employé
+        exit();
+    }
+
+    $id_utilisateur = $_SESSION["user"]->id_utilisateur;
+    $affectations = getEmployeAffectations($pdo, $id_utilisateur);
+
+    // Initialiser les messages d'erreur/succès pour la vue
+    $errors = [];
+    $successMessage = '';
+
+    // Si aucune affectation n'est trouvée
+    if (empty($affectations)) {
+        $errors['no_affectations'] = "Vous n'avez pas d'affectations actuelles.";
+    }
+
+    require_once("Views/base.php");
+} elseif ($uri === "/mes-reservations") {
+    // Vérifier si l'utilisateur est connecté
+    if (!isset($_SESSION["user"])) {
+        $_SESSION['error'] = "Vous devez être connecté pour accéder à cette page.";
+        header("Location: /connexion");
+        exit();
+    }
+    if ($_SESSION["user"]->role !== 'client') {
+        $_SESSION['error'] = "Vous n'êtes pas autorisé à voir cette page.";
+        header("Location: /compte"); // Rediriger vers une autre page si le rôle n'est pas client
+        exit();
+    }
+
+    $title = "Mes Réservations";
+    $template = "Views/Clients/mesReservations.php"; // Chemin vers votre nouveau template
+
+    $id_utilisateur = $_SESSION["user"]->id_utilisateur;
+    $reservations = getClientReservations($pdo, $id_utilisateur);
+
+    // Initialiser les messages d'erreur/succès pour la vue
+    $errors = [];
+    $successMessage = '';
+
+    // Si aucune réservation n'est trouvée
+    if (empty($reservations)) {
+        $errors['no_reservations'] = "Vous n'avez pas de réservations actuelles.";
+    }
+
+    require_once("Views/base.php");
 }
+

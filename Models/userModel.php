@@ -153,3 +153,74 @@ function deleteUserAccount($pdo, $userId)
         return false;
     }
 }
+
+function getEmployeAffectations(PDO $pdo, int $id_utilisateur): array
+{
+    try {
+        $query = "SELECT
+                      ae.id_affectation,
+                      ae.role AS role_affectation,
+                      os.titre AS titre_offre,
+                      os.description AS description_offre,
+                      os.lieu,
+                      os.pays,
+                      os.date_debut,
+                      os.date_fin,
+                      os.statut AS statut_offre
+                  FROM
+                      affectation_employe ae
+                  JOIN
+                      employe e ON ae.id_employe = e.id_employe
+                  JOIN
+                      utilisateur u ON e.id_utilisateur = u.id_utilisateur
+                  JOIN
+                      offre_sejour os ON ae.id_offre = os.id_offre
+                  WHERE
+                      u.id_utilisateur = :id_utilisateur
+                  ORDER BY
+                      os.date_debut DESC"; // Trier par la date de début de l'offre
+
+        $stmt = $pdo->prepare($query);
+        $stmt->execute(['id_utilisateur' => $id_utilisateur]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Erreur lors de la récupération des affectations de l'employé : " . $e->getMessage());
+        return []; // Retourne un tableau vide en cas d'erreur
+    }
+}
+
+function getClientReservations(PDO $pdo, int $id_utilisateur): array
+{
+    try {
+        $query = "SELECT
+                      r.id_reservation,
+                      r.date_reservation,
+                      r.statut AS statut_reservation,
+                      os.titre AS titre_offre,
+                      os.description AS description_offre,
+                      os.lieu,
+                      os.pays,
+                      os.date_debut,
+                      os.date_fin,
+                      os.statut AS statut_offre,
+                      os.photo_principale,
+                      os.type_hebergement
+                  FROM
+                      reservation r
+                  JOIN
+                      offre_sejour os ON r.id_offre = os.id_offre
+                  WHERE
+                      r.id_utilisateur = :id_utilisateur
+                  ORDER BY
+                      r.date_reservation DESC"; // Trier par la date de réservation la plus récente
+
+        $stmt = $pdo->prepare($query);
+        $stmt->execute(['id_utilisateur' => $id_utilisateur]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Erreur lors de la récupération des réservations du client : " . $e->getMessage());
+        return []; // Retourne un tableau vide en cas d'erreur
+    }
+}
