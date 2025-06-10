@@ -19,7 +19,7 @@ Ce projet est un site web de réservation de camping développé dans le cadre d
 
 * **PHP :** Langage de script côté serveur pour la logique métier et l'interaction avec la base de données.
 * **CSS :** Pour la mise en forme et le style de l'interface utilisateur.
-* **SQL :** Langage utilisé pour la gestion et l'interrogation de la base de données relationnelle (par exemple, MySQL ou MariaDB).
+* **SQL :** Langage utilisé pour la gestion et l'interrogation de la base de données relationnelle.
 
 ---
 
